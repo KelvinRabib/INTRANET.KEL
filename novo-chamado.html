@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Chamado</title>
+    <link rel="stylesheet" href="css/style.css">
+  
+</head>
+<body class="dashboard-page">
+    <aside class="sidebar">
+        <h2>Intranet</h2>
+        <ul>
+            <li><a href="Página Inicial.html">🏠Dashboard</a></li>
+            <li><a href="meus-chamados.html">📩Meus Chamados </a ></li>
+            <li><a href="novo-chamado.html">➕Novo Chamado</a></li>
+            <li><a href="configuracoes.html">⚙️Configurações</a></li>
+            <li><a href="index.html">🚪Sair</a></li>
+        </ul>
+  </aside>
+    <main class="main-content">
+        <header>
+            <h1>Abrir Novo Chamado</h1>
+        </header>
+        
+        <section class="form-chamado">
+            <form action="#" method="POST" >
+                <label for="titulo">Título do chamado</label>
+                <input type="text" id="titulo" name="titulo required">
+
+                <label for="descricao">Descrição</label>
+                <textarea  id="descricao" name="descricao" rows="5" required></textarea>
+
+                <label for="categoria">Categoria</label>
+                <select id="categoria" name="categoria">
+                    <option>Suporte Técnico</option>
+                    <option>TI</option>
+                    <option>Infraestrutura</option>
+                    <option>Outro</option>
+                </select>
+
+                <button type="submit">Enviar chamado</button>
+
+            </form>
+        </section>
+
+    </main>
+    
+
+<script>
+
+  document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault() ;
+
+    const titulo = document.getElementById("titulo").value;
+    const descricao = document.getElementById("descricao").value;
+    const categoria = document.getElementById("categoria").value;
+
+    const chamado = {
+      id: Date.now(),
+      titulo,
+      descricao,
+      categoria,
+      status: "Aberto",
+      data: new Date().toLocaleDateString("pt-BR")
+    };
+
+    let chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+    chamados.push(chamado);
+    localStorage.setItem("chamados", JSON.stringify(chamados));
+
+    alert("Chamado enviado com sucesso!");
+    window.location.href = "meus-chamados.html";
+  });
+</script>
+
+
+    </script>
+</body>
+</html>

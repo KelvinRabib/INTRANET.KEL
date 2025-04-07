@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Chamados</title>
+    <link rel="stylesheet" href="css/style.css" >
+</head>
+<body class="dashboard-page">
+    <aside class="sidebar">
+        <h2>Intranet</h2>
+        <ul>
+            <li><a href="Página Inicial.html">🏠Página Inicial</a></li>
+            <li><a href="meus-chamados.html">📩Meus chamados </a></li>
+            <li><a href="novo-chamado.html">➕Novo chamado</a></li>
+            <li><a href="configuracoes.html">⚙️Configuração</a></li>
+            <li><a href="index.html">🚪Sair</a></li>
+        </ul>
+
+    </aside>
+    <main class="main-content">
+        <header>
+            <h1>Meus Chamados</h1>
+        </header>
+
+    <section class="lista-chamados" id="lista-chamados">
+        <div class="ticket">
+            <h3>#12345-Impressora com defeito</h3>
+            <p> status:<span class="status-aberto">Aberto</span></p>
+            <p>Data:05/04/2025</p>
+        </div>
+
+        <div class="ticket">
+            <h3>#123456</h3>
+            <p>Status:<span class="status resolvido">Resolvido</span></p>
+            <p>Data:04/04/2025</p>
+        </div>
+
+    </section>
+</main>
+    
+
+<script>
+    const lista = document.getElementById("lista-chamados");
+    const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+
+    if (chamados.length === 0) {
+        lista.innerHTML = "<p>Você ainda não abriu nenhum chamado</p>";
+    } else {
+        chamados.reverse().forEach(chamado => {
+            const div = document.createElement("div");
+            div.className = "ticket";
+            div.innerHTML = `
+                <h3>#${chamado.id} - ${chamado.titulo}</h3>
+                <p>Status: <span class="status ${chamado.status.toLowerCase()}">${chamado.status}</span></p>
+                <p>Data: ${chamado.data}</p>
+            `;
+            lista.appendChild(div);
+        });
+    }
+</script>
+
+    
+
+</body>
+</html>

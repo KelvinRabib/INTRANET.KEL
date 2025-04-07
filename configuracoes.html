@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page">
+    <aside class="sidebar">
+        <h2>Intranet</h2>
+        <ul>
+            <li><a href="Página Inicial.html">🏠Página Inicial</a></li>
+            <li><a href="meus-chamados.html">📩Meus Chamados</a></li>
+            <li><a href="novo-chamado.html">➕Novo Chamado</a></li>
+            <li><a href="configuracoes.html" class="active">⚙️Configuração</a></li>
+            <li><a href="index.html">🚪Sair</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <h1>Configurações</h1>
+        </header>
+
+        <section class="config-section">
+            <h2>Preferências do Usuário</h2>
+            <label>
+                <input type="checkbox" id="modoEscuro">
+                Ativar modo escuro
+            </label>
+
+            <br><br>
+
+            <label for="nomeUsuario">Nome do usuário:</label><br>
+            <input type="text" id="nomeUsuario" placeholder="Digite seu nome">
+
+            <br><br>
+            <button onclick="salvarConfiguracoes()">Salvar</button>
+        </section>
+    </main>
+
+    <script>
+        // Carrega as configurações salvas
+        window.onload = function () {
+            const modoEscuro = localStorage.getItem("modoEscuro") === "true";
+            const nomeUsuario = localStorage.getItem("nomeUsuario");
+
+            document.getElementById("modoEscuro").checked = modoEscuro;
+            document.getElementById("nomeUsuario").value = nomeUsuario || "";
+        }
+
+        function salvarConfiguracoes() {
+            const modoEscuro = document.getElementById("modoEscuro").checked;
+            const nomeUsuario = document.getElementById("nomeUsuario").value;
+
+            localStorage.setItem("modoEscuro", modoEscuro);
+            localStorage.setItem("nomeUsuario", nomeUsuario);
+
+            alert("Configurações salvas com sucesso!");
+        }
+    </script>
+</body>
+</html>
